@@ -18,8 +18,8 @@ if selected_file and submitted:
             dispTxt = f"""[1번째라인] {firstline}
 [2번째라인] {secondline}\n
 [총 라인수] {len(f.readlines())}"""
-                    st.success(dispTxt)
-                    # st.write(len(f.readlines()))
-            except:
-                st.warning('파일을 메모장에서 "utf-8"로 다시 저장하세요')
+            st.success(dispTxt)
+            # st.write(len(f.readlines()))
+    except:
+        st.warning('파일을 메모장에서 "utf-8"로 다시 저장하세요')
 
