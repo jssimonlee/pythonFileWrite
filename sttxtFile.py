@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 
 uploaded_file = st.file_uploader("업로드 파일을 선택하세요")
 file_list = os.listdir()
