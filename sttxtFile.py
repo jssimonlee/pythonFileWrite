@@ -4,6 +4,7 @@ import os
 uploaded_file = st.file_uploader("업로드 파일을 선택하세요")
 file_list = os.listdir()
 file_list_wanted = []
+extList = ['txt']
 for file in file_list:
     root, extension = os.path.splitext(file)
     if extension.replace('.','') in extList:
