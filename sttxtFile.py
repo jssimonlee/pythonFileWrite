@@ -3,8 +3,9 @@ import os
 
 uploaded_file = st.file_uploader("업로드 파일을 선택하세요",type=['txt'])
 if uploaded_file is not None:
-    st.write(uploaded_file)
-file_list = os.listdir('./')
+    with open(uploaded_file.name,"wb") as f:
+         f.write(uploaded_file.getbuffer())
+file_list = os.listdir()
 file_list_wanted = []
 extList = ['txt']
 for file in file_list:
