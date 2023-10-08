@@ -1,6 +1,6 @@
 import streamlit as st
 
-uploaded_file = st.file_uploader("업로드 파일을 선택하세요", type=extList)
+uploaded_file = st.file_uploader("업로드 파일을 선택하세요")
 file_list = os.listdir()
 file_list_wanted = []
 for file in file_list:
