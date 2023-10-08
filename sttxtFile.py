@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 
-uploaded_file = st.file_uploader("업로드 파일을 선택하세요")
+uploaded_file = st.file_uploader("업로드 파일을 선택하세요",type=['txt'])
 if uploaded_file is not None:
     st.write(uploaded_file.name, uploaded_file.size)
 file_list = os.listdir()
