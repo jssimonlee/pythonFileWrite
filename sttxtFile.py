@@ -1,30 +1,49 @@
 import streamlit as st
 import os
 
-uploaded_file = st.file_uploader("업로드 파일을 선택하세요",type=['txt'])
-if uploaded_file is not None:
-    with open(uploaded_file.name,"wb") as f:
-         f.write(uploaded_file.getbuffer())
-file_list = os.listdir()
-file_list_wanted = []
-extList = ['txt']
-for file in file_list:
-    root, extension = os.path.splitext(file)
-    if extension.replace('.','') in extList:
-        if file != 'requirements.txt':
-            file_list_wanted.append(file)
-selected_file = st.selectbox('확인하고 싶은 파일을 선택하세요.',file_list_wanted)
-submitted = st.button("파일내용확인")
-if selected_file and submitted:
-    try:
-        with open(selected_file,'r', encoding='utf-8') as f:
-            firstline = f.readline().replace("  ","{2칸}").replace("\t","{tab}")
-            secondline = f.readline().strip().replace("  ","{2칸}").replace("\t","{tab}")
-            dispTxt = f"""[1번째라인] {firstline}
-[2번째라인] {secondline}\n
-[총 라인수] {len(f.readlines())}"""
-            st.success(dispTxt)
-            # st.write(len(f.readlines()))
-    except:
-        st.warning('파일을 메모장에서 "utf-8"로 다시 저장하세요')
 
+tab1, tab2, tab3 = st.tabs(["파일 업로드", "파일삭제", "파일 다운로드"])
+with tab1:
+    # 파일 업로드
+    with st.form("upload_Form"):
+        st.subheader("파일 업로드")
+        uploaded_file = st.file_uploader("업로드 파일을 선택하세요")
+        if uploaded_file is not None:
+            with open(uploaded_file.name,"wb") as f:
+                f.write(uploaded_file.getbuffer())
+        submitted = st.form_submit_button("파일저장")
+        if submitted:
+            st.info(f'{uploaded_file.name}이 업로드 되었습니다.')
+
+with tab2:
+    # 파일 삭제
+    # extList = ['txt']
+    file_list = os.listdir()
+    file_list_wanted = []
+    for file in file_list:
+        # root, extension = os.path.splitext(file)
+        # if extension.replace('.','') in extList:
+        if file != 'sttxtFile.py':
+            file_list_wanted.append(file)
+    selected_file = st.selectbox('삭제하고 싶은 파일을 선택하세요.',file_list_wanted)
+    submitted1 = st.button("삭제")
+    if submitted1 and selected_file:
+        os.remove(os.path.join(os.getcwd(),selected_file))
+        st.warning(f'"{selected_file}" 파일이 삭제되었습니다.')
+        st.info("사이트를 다시 로드하세요(재실행)")
+
+with tab3:
+    #form에서는  download_button을 쓸 수 없어서 form 사용 안함
+    # 다운로드
+    file_list = os.listdir()
+    file_list_wanted = []
+    for file in file_list:
+        root, extension = os.path.splitext(file)
+        # if extension.replace('.','') in extList:
+        if file != 'sttxtFile.py':
+            file_list_wanted.append(file)
+    selected_file = st.selectbox('파일선택',file_list_wanted)
+    if selected_file:
+        with open(selected_file,'rb') as f:
+            if st.download_button('다운로드', f, selected_file):
+                st.success(f'{selected_file} 파일이 다운로드 되었습니다.')
