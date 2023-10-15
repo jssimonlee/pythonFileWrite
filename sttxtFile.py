@@ -44,6 +44,6 @@ with tab3:
             file_list_wanted.append(file)
     selected_file = st.selectbox('파일선택',file_list_wanted)
     if selected_file:
-        with open(selected_file,'rb') as f:
-            if st.download_button('다운로드', f, selected_file):
-                st.success(f'{selected_file} 파일이 다운로드 되었습니다.')
+        # with open(selected_file,'rb') as f:
+        if st.download_button('다운로드', selected_file, selected_file):
+            st.success(f'{selected_file} 파일이 다운로드 되었습니다.')
