@@ -17,13 +17,12 @@ with tab1:
 
 with tab2:
     # 파일 삭제
-    # extList = ['txt']
     file_list = os.listdir()
     file_list_wanted = []
     for file in file_list:
         # root, extension = os.path.splitext(file)
         # if extension.replace('.','') in extList:
-        if file != 'sttxtFile.py':
+        if file != 'sttxtFile.py' and file[0] != '.':
             file_list_wanted.append(file)
     selected_file = st.selectbox('삭제하고 싶은 파일을 선택하세요.',file_list_wanted)
     submitted1 = st.button("삭제")
@@ -40,10 +39,10 @@ with tab3:
     for file in file_list:
         root, extension = os.path.splitext(file)
         # if extension.replace('.','') in extList:
-        if file != 'sttxtFile.py':
+        if file != 'sttxtFile.py' and file[0] != '.':
             file_list_wanted.append(file)
     selected_file = st.selectbox('파일선택',file_list_wanted)
     if selected_file:
-        # with open(selected_file,'rb') as f:
-        if st.download_button('다운로드', selected_file, selected_file):
-            st.success(f'{selected_file} 파일이 다운로드 되었습니다.')
+        with open(selected_file,'rb') as f:
+            if st.download_button('다운로드', selected_file, selected_file):
+                st.success(f'{selected_file} 파일이 다운로드 되었습니다.')
