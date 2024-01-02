@@ -2,7 +2,7 @@ import streamlit as st
 import os
 
 pw = st.text_input("비번을 넣으세요", type="password")
-if pw == st.secrets["pw"]:    
+if pw == st.secrets["pw"] or pw == st.secrets["pwopen"]:    
     tab1, tab2, tab3 = st.tabs(["파일 업로드", "파일삭제", "파일 다운로드"])
     with tab1:
         # 파일 업로드
